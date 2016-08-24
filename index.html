@@ -4,5 +4,34 @@
 <button class="logout">Log Out</button>
 
 <script type="text/javascript">
-  // empty for now  
+
+  //This is where we'll log out and also test our authentication
+
+   $('.logout').on('click', function (e) {
+    e.preventDefault();
+    localStorage.removeItem('passport-jwt');
+  });
+
+  var getToken = function () {
+    return localStorage['passport-jwt'];
+  };
+
+  if (getToken) {
+    
+    $('.get').on('click', function (e) {
+      e.preventDefault();
+      
+      $.ajax({
+        method: 'GET',
+        url: '/hello',
+        headers: {Authorization: 'Bearer ' + JSON.parse(getToken()).token},
+        success: function (data) {
+          console.log(data);
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    });
+  };
 </script>

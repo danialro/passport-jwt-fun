@@ -1,6 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
 <form>
+<h3>Register</h3>
   <div>
     <label>Username:</label>
     <input type="text" id="username"/>
@@ -15,6 +16,7 @@
 </form>
 
 <script type="text/javascript">
+
   $('button').on('click', function (e) {
     e.preventDefault();
 
@@ -28,9 +30,16 @@
       url: '/register',
       data: data,
       success: function (token) {
-        // empty for now
+        console.log(token);
+        var token = JSON.stringify(token);
+        localStorage['passport-jwt'] = token;
       }
     });
   });
 
 </script>
+
+
+
+
+
